@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -394,7 +394,6 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: ee2eaf3c0f5109442995d5227417a7e4, type: 2}
   normalMaterial: {fileID: 2100000, guid: 324141b6687c4124e8f22977051be92e, type: 2}
   threshold: 100
-  force: 50
   player: {fileID: 15348405}
   multiplier: 1
 --- !u!114 &223974233
@@ -1217,7 +1216,6 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: ee2eaf3c0f5109442995d5227417a7e4, type: 2}
   normalMaterial: {fileID: 2100000, guid: 324141b6687c4124e8f22977051be92e, type: 2}
   threshold: 100
-  force: 10
   player: {fileID: 15348405}
   multiplier: 1
 --- !u!65 &608348716
@@ -1744,6 +1742,7 @@ GameObject:
   - component: {fileID: 1310459843}
   - component: {fileID: 1310459842}
   - component: {fileID: 1310459841}
+  - component: {fileID: 1310459845}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1862,6 +1861,19 @@ Transform:
   m_Father: {fileID: 765712967}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1310459845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310459840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b2e2571f2cbad46a8a5c7932a5e23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 100
 --- !u!1 &1397654221
 GameObject:
   m_ObjectHideFlags: 0

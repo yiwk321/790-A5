@@ -12,7 +12,7 @@ public class Interactable : MonoBehaviour
     public Material selectedMaterial = null;
     public Material normalMaterial = null;
     public float threshold = 100;
-    public float force = 10;
+    private float force = 10;
     public XRRig player = null;
     private MeshRenderer meshRenderer = null;
     private Rigidbody rigidBody = null;
@@ -39,6 +39,7 @@ public class Interactable : MonoBehaviour
         leftController = leftHandDevices[0];
         rightController = rightHandDevices[0];
 
+        force = FindObjectOfType<Avatar>().force;
     }
 
     public void Hover() {

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 155101224065236038}
   - component: {fileID: -4960035442930979312}
   - component: {fileID: 8989402517152105452}
+  - component: {fileID: -5201773947957693768}
   m_Layer: 0
   m_Name: Steel
   m_TagString: Untagged
@@ -91,7 +92,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155101224065236033}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1d6d7c8be4e822e4da1323e7beae6f8b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -228,7 +229,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoveringMaterial: {fileID: 2100000, guid: a958ee30bfd5a3647a2bb51adbb8bddc, type: 2}
   selectedMaterial: {fileID: 2100000, guid: ee2eaf3c0f5109442995d5227417a7e4, type: 2}
-  normalMaterial: {fileID: 2100000, guid: e825a974ab72dae49a15437b78f18fab, type: 2}
   threshold: 100
   player: {fileID: 0}
   multiplier: 1
+--- !u!54 &-5201773947957693768
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155101224065236033}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

@@ -36,7 +36,7 @@ public class Player : MonoBehaviour {
         XRRayInteractor interactor = controller.GetComponent<XRRayInteractor>();
         if (interactor.TryGetCurrent3DRaycastHit(out hit) && hit.rigidbody != null) {
             Interactable interactable = hit.transform.gameObject.GetComponent<Interactable>();
-            if (interactable.multiplier != multiplier) return;
+            if (interactable == null || interactable.multiplier != multiplier) return;
             Vector3 direction = hit.point - transform.position;
             direction.Normalize();
             if (hit.rigidbody.mass > threshold) {

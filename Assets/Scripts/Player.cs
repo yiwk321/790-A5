@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
     private void Start() {
         leftRayInteractor = GameObject.Find("LeftHand Controller").GetComponent<XRRayInteractor>();
         rightRayInteractor = GameObject.Find("RightHand Controller").GetComponent<XRRayInteractor>();
+        maxPushHeight += GetComponent<CapsuleCollider>().height / 2;
     }
 
     private void FixedUpdate() {
@@ -56,7 +57,7 @@ public class Player : MonoBehaviour {
                     direction = Vector3.down;
                 }
                 //Caps push height of player
-                if (multiplier > 0 && transform.position.y > maxPushHeight) {
+                if (multiplier > 0 && !Physics.Raycast(transform.position, Vector3.down, maxPushHeight + 0.1f)) {
                     var vel = GetComponent<Rigidbody>().velocity;
                     GetComponent<Rigidbody>().velocity = new Vector3(vel.x, 0, vel.z);
                     direction.y = -9.8f / multiplier / force;

@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 15348404}
   - component: {fileID: 15348407}
   - component: {fileID: 15348408}
+  - component: {fileID: 15348409}
   m_Layer: 0
   m_Name: XR Rig
   m_TagString: Untagged
@@ -221,6 +222,24 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &15348409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15348403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b2e2571f2cbad46a8a5c7932a5e23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 10
+  threshold: 100
+  leftSelect: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  rightSelect: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  leftController: {fileID: 0}
+  rightController: {fileID: 0}
 --- !u!1 &16892817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,7 +1896,6 @@ GameObject:
   - component: {fileID: 1310459843}
   - component: {fileID: 1310459842}
   - component: {fileID: 1310459841}
-  - component: {fileID: 1310459845}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1996,19 +2014,6 @@ Transform:
   m_Father: {fileID: 765712967}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1310459845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1310459840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97b2e2571f2cbad46a8a5c7932a5e23a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 10
 --- !u!1 &1397654221
 GameObject:
   m_ObjectHideFlags: 0

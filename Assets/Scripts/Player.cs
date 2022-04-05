@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
     public float maxHorizontalVelocity = 10;
     public float maxVerticalVelocity = 10;
     public float maxPushHeight = 5;
+    public float pushDownAngle = 30;
     public InputActionReference leftForceReference = null;
     public InputActionReference rightForceReference = null;
     private XRRayInteractor leftRayInteractor = null;
@@ -53,11 +54,16 @@ public class Player : MonoBehaviour {
                     direction.y = -9.8f / multiplier / force;
                 }
                 //If pointing mostly straight down, ignore horizontal offset
-                if (Vector3.Angle(direction, Vector3.down) < 30) {
+                if (Vector3.Angle(direction, Vector3.down) < pushDownAngle) {
                     direction = Vector3.down;
                 }
                 //Caps push height of player
-                if (multiplier > 0 && !Physics.Raycast(transform.position, Vector3.down, maxPushHeight + 0.1f)) {
+                // if (multiplier > 0 && !Physics.Raycast(transform.position, Vector3.down, maxPushHeight + 0.1f)) {
+                //     var vel = GetComponent<Rigidbody>().velocity;
+                //     GetComponent<Rigidbody>().velocity = new Vector3(vel.x, 0, vel.z);
+                //     direction.y = -9.8f / multiplier / force;
+                // }
+                if (multiplier > 0 && transform.position.y - hit.point.y > maxPushHeight + 0.1f) {
                     var vel = GetComponent<Rigidbody>().velocity;
                     GetComponent<Rigidbody>().velocity = new Vector3(vel.x, 0, vel.z);
                     direction.y = -9.8f / multiplier / force;
@@ -74,6 +80,7 @@ public class Player : MonoBehaviour {
                 }
                 hit.rigidbody.AddForce(direction * force * multiplier);
             }
+            rayInteractor.gameObject.GetComponent<XRController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 
         }
     }
 }

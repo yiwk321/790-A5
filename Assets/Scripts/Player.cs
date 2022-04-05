@@ -15,21 +15,30 @@ public class Player : MonoBehaviour {
     public InputActionReference rightForceReference = null;
     private XRRayInteractor leftRayInteractor = null;
     private XRRayInteractor rightRayInteractor = null;
+    private ActionBasedContinuousMoveProvider locomotion = null;
+    private float defaultSpeed = 0;
 
     private void Start() {
         leftRayInteractor = GameObject.Find("LeftHand Controller").GetComponent<XRRayInteractor>();
         rightRayInteractor = GameObject.Find("RightHand Controller").GetComponent<XRRayInteractor>();
         maxPushHeight += GetComponent<CapsuleCollider>().height / 2;
+        locomotion = GameObject.Find("Locomotion System").GetComponent<ActionBasedContinuousMoveProvider>();
+        defaultSpeed = locomotion.moveSpeed;
     }
 
     private void FixedUpdate() {
         float leftForce = leftForceReference.action.ReadValue<float>();
         if (leftForce > 0.01) {
+            locomotion.moveSpeed = 0;
             Move(leftRayInteractor, leftForce);
         }
         float rightForce = rightForceReference.action.ReadValue<float>();
         if (rightForce > 0.01) {
+            locomotion.moveSpeed = 0;
             Move(rightRayInteractor, -1 * rightForce);
+        }
+        if (rightForce < 0.01 && leftForce < 0.01) {
+            locomotion.moveSpeed = defaultSpeed;
         }
     }
 
@@ -80,7 +89,7 @@ public class Player : MonoBehaviour {
                 }
                 hit.rigidbody.AddForce(direction * force * multiplier);
             }
-            rayInteractor.gameObject.GetComponent<XRController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 
+            rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 
         }
     }
 }

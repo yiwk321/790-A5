@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Verticle_Puzzle.unity
     guid: 4c7789bd0e3266e45bbbfad638842ce6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Ken Scene.unity
     guid: af834c4f75256384281b77f7081d60b8
   - enabled: 1

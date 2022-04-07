@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
 
     private void Update() {
         timer += Time.deltaTime;
-        int timeLeft = timeLimit - (int)(timer % 60);
+        int timeLeft = (int)(timeLimit - timer);
         int min = timeLeft / 60;
         int sec = timeLeft % 60;
         if (sec < 10) {
@@ -50,17 +50,14 @@ public class Player : MonoBehaviour {
     private void FixedUpdate() {
         float leftForce = leftForceReference.action.ReadValue<float>();
         if (leftForce > 0.01) {
-            locomotion.moveSpeed = 0;
             Move(leftRayInteractor, leftForce);
         }
         float rightForce = rightForceReference.action.ReadValue<float>();
         if (rightForce > 0.01) {
-            locomotion.moveSpeed = 0;
             Move(rightRayInteractor, -1 * rightForce);
         }
         if (rightForce < 0.01 && leftForce < 0.01 && isGrounded()) {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
-            locomotion.moveSpeed = defaultSpeed;
         }
 
         if(GetComponent<Rigidbody>().velocity.y != 0){

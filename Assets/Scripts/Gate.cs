@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
-    public int hp = 3;
+    public int maxHP = 3;
+    public string widthAxis = "x";
+    private int hp;
+
+    private void Start() {
+        hp = maxHP;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Cube")
@@ -12,8 +19,26 @@ public class Gate : MonoBehaviour
             hp--;
             Destroy(collision.gameObject);
             if (hp == 0) {
-                GameObject.Find("XR Rig").GetComponent<Menu>().win();
+                Destroy(gameObject);
+            } else {
+                Vector3 change = Vector3.zero;
+                if(widthAxis == "x") {
+                    change = new Vector3(1, 0, 0);
+                } else if(widthAxis == "y") {
+                    change = new Vector3(0, 1, 0);
+                } else if(widthAxis == "z") {
+                    change = new Vector3(0, 0, 1);
+                }
+                transform.localScale -= change;
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<Menu>().win();
         }
     }
 }

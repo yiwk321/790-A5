@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
     public float force = 10;
@@ -11,12 +12,16 @@ public class Player : MonoBehaviour {
     public float maxVerticalVelocity = 10;
     public float maxPushHeight = 5;
     public float pushDownAngle = 30;
+    public int timeLimit = 180;
+    public Text Timer = null;
+    private float timer = 0; 
     public InputActionReference leftForceReference = null;
     public InputActionReference rightForceReference = null;
     private XRRayInteractor leftRayInteractor = null;
     private XRRayInteractor rightRayInteractor = null;
     private ActionBasedContinuousMoveProvider locomotion = null;
     private float defaultSpeed = 0;
+    
 
     private void Start() {
         leftRayInteractor = GameObject.Find("LeftHand Controller").GetComponent<XRRayInteractor>();
@@ -26,19 +31,37 @@ public class Player : MonoBehaviour {
         defaultSpeed = locomotion.moveSpeed;
     }
 
+    private void Update() {
+        timer += Time.deltaTime;
+        int timeLeft = timeLimit - (int)(timer % 60);
+        int min = timeLeft / 60;
+        int sec = timeLeft % 60;
+        if (sec < 10) {
+            Timer.text = min + ":0" + sec;
+        } else {
+            Timer.text = min + ":" + sec;
+        }
+        if (timeLeft <= 0) {
+            GetComponent<Menu>().lose();
+        }
+    }
+
     private void FixedUpdate() {
         float leftForce = leftForceReference.action.ReadValue<float>();
         if (leftForce > 0.01) {
-            locomotion.moveSpeed = 0;
             Move(leftRayInteractor, leftForce);
         }
         float rightForce = rightForceReference.action.ReadValue<float>();
         if (rightForce > 0.01) {
-            locomotion.moveSpeed = 0;
             Move(rightRayInteractor, -1 * rightForce);
         }
-        if (rightForce < 0.01 && leftForce < 0.01) {
+        if (rightForce < 0.01 && leftForce < 0.01 && isGrounded()) {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
             locomotion.moveSpeed = defaultSpeed;
+        } else if(!isGrounded()) {
+            locomotion.moveSpeed = defaultSpeed / 5;
+        } else {
+            locomotion.moveSpeed = 0;
         }
     }
 
@@ -91,5 +114,9 @@ public class Player : MonoBehaviour {
             }
             rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 
         }
+    }
+
+    private bool isGrounded(){
+        return Physics.Raycast(transform.position, Vector3.down, GetComponent<CapsuleCollider>().height / 2 + 0.1f);
     }
 }

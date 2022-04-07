@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     public float maxHorizontalVelocity = 10;
     public float maxVerticalVelocity = 10;
     public float maxPushHeight = 5;
-    public float pushDownAngle = 30;
+    public float pushDownAngle = 15;
     public int timeLimit = 180;
     public Text Timer = null;
     private float timer = 0; 
@@ -49,10 +49,12 @@ public class Player : MonoBehaviour {
     private void FixedUpdate() {
         float leftForce = leftForceReference.action.ReadValue<float>();
         if (leftForce > 0.01) {
+            locomotion.moveSpeed = 0;
             Move(leftRayInteractor, leftForce);
         }
         float rightForce = rightForceReference.action.ReadValue<float>();
         if (rightForce > 0.01) {
+            locomotion.moveSpeed = 0;
             Move(rightRayInteractor, -1 * rightForce);
         }
         if (rightForce < 0.01 && leftForce < 0.01 && isGrounded()) {
@@ -62,6 +64,10 @@ public class Player : MonoBehaviour {
             locomotion.moveSpeed = defaultSpeed / 2;
         } else {
             locomotion.moveSpeed = 0;
+        }
+
+        if(GetComponent<Rigidbody>().velocity.y != 0){
+            GetComponent<Rigidbody>().AddForce(0,7,0);
         }
     }
 

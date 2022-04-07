@@ -8,15 +8,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Verticle_Puzzle.unity
     guid: 4c7789bd0e3266e45bbbfad638842ce6
   - enabled: 0
     path: Assets/Scenes/Ken Scene.unity
     guid: af834c4f75256384281b77f7081d60b8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StartScene.unity
     guid: 11392ee29c3f6a541a0d46ea4d1ba11b
+  - enabled: 1
+    path: Assets/Scenes/parkour.unity
+    guid: be3221aa94658634d98aa2d915904e5d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: dd7776f17b3b77144a4c133e4d39410a, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 6fdb16e6e472a1141bdf2b8b7934f37b, type: 2}

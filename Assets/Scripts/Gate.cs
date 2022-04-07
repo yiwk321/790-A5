@@ -24,11 +24,11 @@ public class Gate : MonoBehaviour
             } else {
                 Vector3 change = Vector3.zero;
                 if(widthAxis == "x") {
-                    change = new Vector3(1, 0, 0);
+                    change = new Vector3(1.0f/maxHP, 0, 0);
                 } else if(widthAxis == "y") {
-                    change = new Vector3(0, 1, 0);
+                    change = new Vector3(0, 1.0f/maxHP, 0);
                 } else if(widthAxis == "z") {
-                    change = new Vector3(0, 0, 1);
+                    change = new Vector3(0, 0, 1.0f/maxHP);
                 }
                 transform.localScale -= change;
             }

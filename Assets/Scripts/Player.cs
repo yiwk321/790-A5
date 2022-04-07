@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
     public float pushDownAngle = 15;
     public int timeLimit = 180;
     public Text Timer = null;
+    public float upForce = 7;
     private float timer = 0; 
     public InputActionReference leftForceReference = null;
     public InputActionReference rightForceReference = null;
@@ -60,14 +61,10 @@ public class Player : MonoBehaviour {
         if (rightForce < 0.01 && leftForce < 0.01 && isGrounded()) {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             locomotion.moveSpeed = defaultSpeed;
-        } else if(!isGrounded()) {
-            locomotion.moveSpeed = defaultSpeed / 2;
-        } else {
-            locomotion.moveSpeed = 0;
         }
 
         if(GetComponent<Rigidbody>().velocity.y != 0){
-            GetComponent<Rigidbody>().AddForce(0,7,0);
+            GetComponent<Rigidbody>().AddForce(0,upForce,0);
         }
     }
 

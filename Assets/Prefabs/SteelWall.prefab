@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SteelWall
       objectReference: {fileID: 0}
+    - target: {fileID: 155101224065236033, guid: 998e8e29161b287469b434e90b15d7b8, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 155101224065236043, guid: 998e8e29161b287469b434e90b15d7b8, type: 3}
       propertyPath: m_RootOrder
       value: 0

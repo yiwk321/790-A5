@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -5201773947957693768}
   m_Layer: 0
   m_Name: SteelCube
-  m_TagString: Untagged
+  m_TagString: Cube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,8 +229,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoveringMaterial: {fileID: 2100000, guid: a958ee30bfd5a3647a2bb51adbb8bddc, type: 2}
   selectedMaterial: {fileID: 2100000, guid: ee2eaf3c0f5109442995d5227417a7e4, type: 2}
-  threshold: 100
-  player: {fileID: 0}
   multiplier: 1
 --- !u!54 &-5201773947957693768
 Rigidbody:

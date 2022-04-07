@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IronWall
       objectReference: {fileID: 0}
+    - target: {fileID: 1021988961767555503, guid: 6c497ebb7b0b85f4b81fef21e6bd5250, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4307204936052887382, guid: 6c497ebb7b0b85f4b81fef21e6bd5250, type: 3}
       propertyPath: m_Mass
       value: 1000

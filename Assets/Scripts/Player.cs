@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             locomotion.moveSpeed = defaultSpeed;
         } else if(!isGrounded()) {
-            locomotion.moveSpeed = defaultSpeed / 5;
+            locomotion.moveSpeed = defaultSpeed / 2;
         } else {
             locomotion.moveSpeed = 0;
         }

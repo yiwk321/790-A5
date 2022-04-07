@@ -19,7 +19,8 @@ public class Gate : MonoBehaviour
             hp--;
             Destroy(collision.gameObject);
             if (hp == 0) {
-                Destroy(gameObject);
+                GetComponent<MeshRenderer>().enabled = false;
+                GetComponent<BoxCollider>().isTrigger = true;
             } else {
                 Vector3 change = Vector3.zero;
                 if(widthAxis == "x") {

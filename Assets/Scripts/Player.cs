@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
     public float pushDownAngle = 15;
     public int timeLimit = 180;
     public Text Timer = null;
-    public float upForce = 7;
+    public float upForce = 6;
     private float timer = 0; 
     public InputActionReference leftForceReference = null;
     public InputActionReference rightForceReference = null;

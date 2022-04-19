@@ -60,7 +60,7 @@ public class Player : MonoBehaviour {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
-        if(GetComponent<Rigidbody>().velocity.y != 0){
+        if(GetComponent<Rigidbody>().velocity.y < 0){
             GetComponent<Rigidbody>().AddForce(0,upForce,0);
         }
     }
@@ -72,6 +72,18 @@ public class Player : MonoBehaviour {
             //Left hand only interact with Steel (multiplier 1)
             //Right hand only interact with Iron (multiplier -1)
             if (interactable == null || interactable.multiplier * multiplier <= 0) return;
+            if (multiplier == -1 && Vector3.Angle(hit.point - rayInteractor.transform.position, Vector3.down) < pushDownAngle && hit.rigidbody.mass < threshold) {
+                if (Physics.Raycast(hit.transform.position, Vector3.down, interactable.GetComponent<BoxCollider>().size.y / 2 + 0.1f)) {
+                    Vector3 direction = Vector3.down;
+                    if (multiplier > 0 && transform.position.y - hit.point.y > maxPushHeight + 0.1f) {
+                        var vel = GetComponent<Rigidbody>().velocity;
+                        GetComponent<Rigidbody>().velocity = new Vector3(vel.x, 0, vel.z);
+                        direction.y = -9.8f / multiplier / force;
+                    }
+                    GetComponent<Rigidbody>().AddForce(-1 * direction * force * multiplier);
+                    return;
+                }
+            }
             if (hit.rigidbody.mass > threshold) {
                 Vector3 direction = hit.point - rayInteractor.transform.position;
                 direction.Normalize();

@@ -33,18 +33,18 @@ public class Player : MonoBehaviour {
     }
 
     private void Update() {
-        timer += Time.deltaTime;
-        int timeLeft = (int)(timeLimit - timer);
-        int min = timeLeft / 60;
-        int sec = timeLeft % 60;
-        if (sec < 10) {
-            Timer.text = min + ":0" + sec;
-        } else {
-            Timer.text = min + ":" + sec;
-        }
-        if (timeLeft <= 0) {
-            GetComponent<Menu>().lose();
-        }
+        // timer += Time.deltaTime;
+        // int timeLeft = (int)(timeLimit - timer);
+        // int min = timeLeft / 60;
+        // int sec = timeLeft % 60;
+        // if (sec < 10) {
+        //     Timer.text = min + ":0" + sec;
+        // } else {
+        //     Timer.text = min + ":" + sec;
+        // }
+        // if (timeLeft <= 0) {
+        //     GetComponent<Menu>().lose();
+        // }
     }
 
     private void FixedUpdate() {
@@ -71,9 +71,17 @@ public class Player : MonoBehaviour {
             Interactable interactable = hit.transform.gameObject.GetComponent<Interactable>();
             //Left hand only interact with Steel (multiplier 1)
             //Right hand only interact with Iron (multiplier -1)
+            Debug.Log(Vector3.Angle(hit.point - rayInteractor.transform.position, Vector3.up) );
+            string angle = Vector3.Angle(hit.point - rayInteractor.transform.position, Vector3.up).ToString();
+            // Timer.text = "multiplier = " + multiplier + "; angle = " + angle + "; mass = " + hit.rigidbody.mass;
+            Timer.text = "multiplier  = " + multiplier;
+            Timer.text += "\tangle = " + angle;
+            Timer.text += "\tmass = " + hit.rigidbody.mass;
+
             if (interactable == null || interactable.multiplier * multiplier <= 0) return;
-            if (multiplier == -1 && Vector3.Angle(hit.point - rayInteractor.transform.position, Vector3.down) < pushDownAngle && hit.rigidbody.mass < threshold) {
+            if (multiplier == 1 && Vector3.Angle(hit.point - rayInteractor.transform.position, Vector3.down) < pushDownAngle && hit.rigidbody.mass < threshold) {
                 if (Physics.Raycast(hit.transform.position, Vector3.down, interactable.GetComponent<BoxCollider>().size.y / 2 + 0.1f)) {
+                    Timer.text += "\npush down on steelpad";
                     Vector3 direction = Vector3.down;
                     if (multiplier > 0 && transform.position.y - hit.point.y > maxPushHeight + 0.1f) {
                         var vel = GetComponent<Rigidbody>().velocity;
@@ -81,10 +89,19 @@ public class Player : MonoBehaviour {
                         direction.y = -9.8f / multiplier / force;
                     }
                     GetComponent<Rigidbody>().AddForce(-1 * direction * force * multiplier);
+                    rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 
                     return;
                 }
             }
+            if (multiplier == -1 && Vector3.Angle(rayInteractor.transform.position - hit.point, Vector3.up) < pushDownAngle && hit.rigidbody.mass < threshold) {
+                Timer.text += "\npull up on iron cube";
+                Vector3 direction = Vector3.up;
+                hit.rigidbody.AddForce(-1 * direction * force * multiplier);
+                rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 
+                return;
+            }
             if (hit.rigidbody.mass > threshold) {
+                Timer.text += "\npush on wall";
                 Vector3 direction = hit.point - rayInteractor.transform.position;
                 direction.Normalize();
                 //Caps horizontal velocity of player
@@ -114,6 +131,7 @@ public class Player : MonoBehaviour {
                 }
                 GetComponent<Rigidbody>().AddForce(-1 * direction * force * multiplier);
             } else {
+                Timer.text += "\nPull on cube";
                 Vector3 direction = hit.transform.position - transform.position;
                 direction.Normalize();
                 //Caps horizontal velocity of cubes
@@ -122,6 +140,7 @@ public class Player : MonoBehaviour {
                     direction.x = 0;
                     direction.z = 0;
                 }
+                Timer.text += "\n force = " + direction * force * multiplier;
                 hit.rigidbody.AddForce(direction * force * multiplier);
             }
             rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 

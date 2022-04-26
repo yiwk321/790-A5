@@ -9,11 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5201773947957693768, guid: 998e8e29161b287469b434e90b15d7b8, type: 3}
       propertyPath: m_Mass
-      value: 1000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -5201773947957693768, guid: 998e8e29161b287469b434e90b15d7b8, type: 3}
       propertyPath: m_Constraints
-      value: 126
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 155101224065236033, guid: 998e8e29161b287469b434e90b15d7b8, type: 3}
       propertyPath: m_Name

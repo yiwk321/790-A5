@@ -22,6 +22,8 @@ public class Player : MonoBehaviour {
     private XRRayInteractor rightRayInteractor = null;
     private ActionBasedContinuousMoveProvider locomotion = null;
     private float defaultSpeed = 0;
+    private float doorTimer = 0;
+    private float doorTimeLimit = 1;
     
 
     private void Start() {
@@ -71,14 +73,19 @@ public class Player : MonoBehaviour {
             Interactable interactable = hit.transform.gameObject.GetComponent<Interactable>();
             //Left hand only interact with Steel (multiplier 1)
             //Right hand only interact with Iron (multiplier -1)
-            Debug.Log(Vector3.Angle(hit.point - rayInteractor.transform.position, Vector3.up) );
             string angle = Vector3.Angle(hit.point - rayInteractor.transform.position, Vector3.up).ToString();
-            // Timer.text = "multiplier = " + multiplier + "; angle = " + angle + "; mass = " + hit.rigidbody.mass;
-            Timer.text = "multiplier  = " + multiplier;
-            Timer.text += "\tangle = " + angle;
-            Timer.text += "\tmass = " + hit.rigidbody.mass;
+            Timer.text = "multiplier = " + multiplier + "; angle = " + angle + "; mass = " + hit.rigidbody.mass;
 
             if (interactable == null || interactable.multiplier * multiplier <= 0) return;
+            if (hit.transform.gameObject.tag == "Door") {
+                doorTimer += Time.deltaTime;
+                if (doorTimer >= doorTimeLimit) {
+                    hit.rigidbody.constraints = RigidbodyConstraints.None;
+                    hit.rigidbody.isKinematic = false;
+                }
+            } else {
+                doorTimer = 0;
+            }
             if (multiplier == 1 && Vector3.Angle(hit.point - rayInteractor.transform.position, Vector3.down) < pushDownAngle && hit.rigidbody.mass < threshold) {
                 if (Physics.Raycast(hit.transform.position, Vector3.down, interactable.GetComponent<BoxCollider>().size.y / 2 + 0.1f)) {
                     Timer.text += "\npush down on steelpad";
@@ -132,7 +139,8 @@ public class Player : MonoBehaviour {
                 GetComponent<Rigidbody>().AddForce(-1 * direction * force * multiplier);
             } else {
                 Timer.text += "\nPull on cube";
-                Vector3 direction = hit.transform.position - transform.position;
+                // Vector3 direction = hit.transform.position - transform.position;
+                Vector3 direction = hit.point - transform.position;
                 direction.Normalize();
                 //Caps horizontal velocity of cubes
                 float horizontalVelocity = new Vector2(hit.rigidbody.velocity.x, hit.rigidbody.velocity.z).magnitude;

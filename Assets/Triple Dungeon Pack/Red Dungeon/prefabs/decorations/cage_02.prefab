@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 23479578712828314}
   - component: {fileID: 368723837068630813}
   - component: {fileID: -4227580725259776527}
+  - component: {fileID: -7074090205727662671}
   m_Layer: 0
   m_Name: cage_02
   m_TagString: Untagged
@@ -195,3 +196,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300046, guid: 9889117518dff7b42806ad82249545f8, type: 3}
+--- !u!114 &-7074090205727662671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890592962087062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fed78a3bb2341849b04dba41ee4637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoveringMaterial: {fileID: 0}
+  selectedMaterial: {fileID: 0}
+  multiplier: 1

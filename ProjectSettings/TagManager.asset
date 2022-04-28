@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Cube
+  - Door
   layers:
   - Default
   - TransparentFX

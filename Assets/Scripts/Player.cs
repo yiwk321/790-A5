@@ -87,7 +87,7 @@ public class Player : MonoBehaviour {
                 doorTimer = 0;
             }
             if (multiplier == 1 && Vector3.Angle(hit.point - rayInteractor.transform.position, Vector3.down) < pushDownAngle && hit.rigidbody.mass < threshold) {
-                if (Physics.Raycast(hit.transform.position, Vector3.down, interactable.GetComponent<BoxCollider>().size.y / 2 + 0.1f)) {
+                if (Physics.Raycast(hit.transform.position, Vector3.down, (interactable.GetComponent<BoxCollider>().size.y * interactable.transform.localScale.y / 2 + 0.1f))) {
                     Timer.text += "\npush down on steelpad";
                     Vector3 direction = Vector3.down;
                     if (multiplier > 0 && transform.position.y - hit.point.y > maxPushHeight + 0.1f) {

@@ -103,16 +103,16 @@ public class Player : MonoBehaviour {
                         }
                     }
                    
-                    GetComponent<Rigidbody>().AddForce(-1 * direction * force * multiplier * interactable.multiplier);
-                    rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier, Time.deltaTime); 
+                    GetComponent<Rigidbody>().AddForce(-1 * direction * force * multiplier);
+                    rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(1, Time.deltaTime); 
                     return;
                 }
             }
             if (multiplier == -1 && Vector3.Angle(rayInteractor.transform.position - hit.point, Vector3.up) < pushDownAngle && hit.rigidbody.mass < threshold) {
                 // Timer.text += "\npull up on iron cube";
                 Vector3 direction = Vector3.up;
-                hit.rigidbody.AddForce(-1 * direction * force * multiplier * interactable.multiplier);
-                rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier, Time.deltaTime); 
+                hit.rigidbody.AddForce(-1 * direction * force * multiplier);
+                rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(1, Time.deltaTime); 
                 return;
             }
             if (hit.rigidbody.mass > threshold) {

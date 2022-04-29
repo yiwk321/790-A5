@@ -861,7 +861,7 @@ GameObject:
   - component: {fileID: 3283715913857554803}
   m_Layer: 2
   m_Name: XR Rig
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -941,7 +941,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 1
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -961,13 +961,14 @@ MonoBehaviour:
   threshold: 100
   maxHorizontalVelocity: 5
   maxVerticalVelocity: 5
-  maxPushHeight: 5
+  maxPushHeight: 7
   pushDownAngle: 30
   timeLimit: 180
   Timer: {fileID: 3283715914687884827}
   upForce: 7
   leftForceReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   rightForceReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  restartReference: {fileID: 4904781175629293858, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!114 &3283715913857554803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -980,6 +981,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a16116d5edeef045b7328c3abab48b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameScene: Level2
+  startScene: StartScene
+  bossScene: BossScene
 --- !u!1 &3283715913940817784
 GameObject:
   m_ObjectHideFlags: 0

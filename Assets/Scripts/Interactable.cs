@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class Interactable : MonoBehaviour {
-    private bool hovering = false;
-    private bool selected = false;
+    // private bool hovering = false;
+    // private bool selected = false;
     public Material hoveringMaterial = null;
     public Material selectedMaterial = null;
     private Material defaultMaterial = null;
@@ -50,13 +50,13 @@ public class Interactable : MonoBehaviour {
     }
 
     public void Hover() {
-        hovering = true;
-        changeMaterial();
+        // hovering = true;
+        // changeMaterial();
     }
 
     public void ExitHover() {
-        hovering = false;
-        changeMaterial();
+        // hovering = false;
+        // changeMaterial();
     }
 
     public void Select() {
@@ -94,14 +94,14 @@ public class Interactable : MonoBehaviour {
         // }
     }
 
-    public void ExitSelected() {
-        selected = false;
-        changeMaterial();
-    }
+    // public void ExitSelected() {
+    //     selected = false;
+    //     changeMaterial();
+    // }
 
-    private void changeMaterial() {
-        if (selected) meshRenderer.material = selectedMaterial;
-        else if (hovering) meshRenderer.material = hoveringMaterial;
-        else meshRenderer.material = defaultMaterial;
-    }
+    // private void changeMaterial() {
+    //     if (selected) meshRenderer.material = selectedMaterial;
+    //     else if (hovering) meshRenderer.material = hoveringMaterial;
+    //     else meshRenderer.material = defaultMaterial;
+    // }
 }

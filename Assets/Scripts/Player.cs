@@ -15,9 +15,10 @@ public class Player : MonoBehaviour {
     public int timeLimit = 180;
     public Text Timer = null;
     public float upForce = 6;
-    private float timer = 0; 
+    // private float timer = 0; 
     public InputActionReference leftForceReference = null;
     public InputActionReference rightForceReference = null;
+    public InputActionReference restartReference = null;
     private XRRayInteractor leftRayInteractor = null;
     private XRRayInteractor rightRayInteractor = null;
     private ActionBasedContinuousMoveProvider locomotion = null;
@@ -35,6 +36,9 @@ public class Player : MonoBehaviour {
     }
 
     private void Update() {
+        if (restartReference.action.triggered) {
+            GetComponent<Menu>().reload();
+        }
         // timer += Time.deltaTime;
         // int timeLeft = (int)(timeLimit - timer);
         // int min = timeLeft / 60;
@@ -74,7 +78,7 @@ public class Player : MonoBehaviour {
             //Left hand only interact with Steel (multiplier 1)
             //Right hand only interact with Iron (multiplier -1)
             string angle = Vector3.Angle(hit.point - rayInteractor.transform.position, Vector3.up).ToString();
-            Timer.text = "multiplier = " + multiplier + "; angle = " + angle + "; mass = " + hit.rigidbody.mass;
+            // Timer.text = "multiplier = " + multiplier + "; angle = " + angle + "; mass = " + hit.rigidbody.mass;
 
             if (interactable == null || interactable.multiplier * multiplier <= 0) return;
             if (hit.transform.gameObject.tag == "Door") {
@@ -88,7 +92,7 @@ public class Player : MonoBehaviour {
             }
             if (multiplier == 1 && Vector3.Angle(hit.point - rayInteractor.transform.position, Vector3.down) < pushDownAngle && hit.rigidbody.mass < threshold) {
                 if (Physics.Raycast(hit.transform.position, Vector3.down, (interactable.GetComponent<BoxCollider>().size.y * interactable.transform.localScale.y / 2 + 0.1f))) {
-                    Timer.text += "\npush down on steelpad";
+                    // Timer.text += "\npush down on steelpad";
                     Vector3 direction = Vector3.down;
                     if (multiplier > 0 && transform.position.y - hit.point.y > maxPushHeight + 0.1f) {
                         var vel = GetComponent<Rigidbody>().velocity;
@@ -101,14 +105,14 @@ public class Player : MonoBehaviour {
                 }
             }
             if (multiplier == -1 && Vector3.Angle(rayInteractor.transform.position - hit.point, Vector3.up) < pushDownAngle && hit.rigidbody.mass < threshold) {
-                Timer.text += "\npull up on iron cube";
+                // Timer.text += "\npull up on iron cube";
                 Vector3 direction = Vector3.up;
                 hit.rigidbody.AddForce(-1 * direction * force * multiplier);
                 rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 
                 return;
             }
             if (hit.rigidbody.mass > threshold) {
-                Timer.text += "\npush on wall";
+                // Timer.text += "\npush on wall";
                 Vector3 direction = hit.point - rayInteractor.transform.position;
                 direction.Normalize();
                 //Caps horizontal velocity of player
@@ -138,7 +142,7 @@ public class Player : MonoBehaviour {
                 }
                 GetComponent<Rigidbody>().AddForce(-1 * direction * force * multiplier);
             } else {
-                Timer.text += "\nPull on cube";
+                // Timer.text += "\nPull on cube";
                 // Vector3 direction = hit.transform.position - transform.position;
                 Vector3 direction = hit.point - transform.position;
                 direction.Normalize();
@@ -148,7 +152,7 @@ public class Player : MonoBehaviour {
                     direction.x = 0;
                     direction.z = 0;
                 }
-                Timer.text += "\n force = " + direction * force * multiplier;
+                // Timer.text += "\n force = " + direction * force * multiplier;
                 hit.rigidbody.AddForce(direction * force * multiplier);
             }
             rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 

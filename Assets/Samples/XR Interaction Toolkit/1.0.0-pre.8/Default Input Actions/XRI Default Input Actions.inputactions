@@ -612,6 +612,14 @@
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "0100a531-c034-4df6-943a-91c4a70b36b7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -931,6 +939,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Force",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0373ef2-28ab-4e10-8b9d-26cb2d79ea9c",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "Hold(duration=1)",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

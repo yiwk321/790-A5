@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     public static string text = "";
+    public string gameScene = "Level2";
+    public string startScene = "StartScene";
+    public string bossScene = "BossScene";
 
     private void Start()
     {
@@ -17,16 +20,24 @@ public class Menu : MonoBehaviour
     }
 
     public void StartGame(){
-        SceneManager.LoadScene("parkour");
+        SceneManager.LoadScene(gameScene);
     }
 
     public void win(){
         text = "You win!";
-        SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene(startScene);
     }
 
     public void lose(){
         text = "You lose";
-        SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene(startScene);
+    }
+
+    public void loadBossScene(){
+        SceneManager.LoadScene(startScene);
+    }
+    
+    public void reload(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

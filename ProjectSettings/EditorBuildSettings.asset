@@ -17,9 +17,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartScene.unity
     guid: 11392ee29c3f6a541a0d46ea4d1ba11b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/parkour.unity
     guid: be3221aa94658634d98aa2d915904e5d
+  - enabled: 1
+    path: Assets/Scenes/newlevel.unity
+    guid: c360938310f423b4a99459bc32a69918
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 35608994f6dfff647a52cb228069b0b0
+  - enabled: 0
+    path: Assets/Scenes/Level1.unity
+    guid: 55b6acbd71e39af449f9a1511312ef89
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: dd7776f17b3b77144a4c133e4d39410a, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 6fdb16e6e472a1141bdf2b8b7934f37b, type: 2}

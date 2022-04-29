@@ -7,6 +7,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Interactable : MonoBehaviour {
     // private bool hovering = false;
     // private bool selected = false;
+    public bool ignoreHorzLimit = false; 
+    public bool ignoreVertLimit = false;
     public Material hoveringMaterial = null;
     public Material selectedMaterial = null;
     private Material defaultMaterial = null;

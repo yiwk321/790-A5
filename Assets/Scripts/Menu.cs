@@ -34,7 +34,7 @@ public class Menu : MonoBehaviour
     }
 
     public void loadBossScene(){
-        SceneManager.LoadScene(startScene);
+        SceneManager.LoadScene(bossScene);
     }
     
     public void reload(){

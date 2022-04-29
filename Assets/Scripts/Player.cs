@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     public float maxHorizontalVelocity = 10;
     public float maxVerticalVelocity = 10;
     public float maxPushHeight = 5;
-    public float pushDownAngle = 15;
+    public float pushDownAngle = 250; // 15
     public int timeLimit = 180;
     public Text Timer = null;
     public float upForce = 6;
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour {
     private float defaultSpeed = 0;
     private float doorTimer = 0;
     private float doorTimeLimit = 1;
+    public int noWin = 0; 
     
 
     private void Start() {
@@ -94,21 +95,24 @@ public class Player : MonoBehaviour {
                 if (Physics.Raycast(hit.transform.position, Vector3.down, (interactable.GetComponent<BoxCollider>().size.y * interactable.transform.localScale.y / 2 + 0.1f))) {
                     // Timer.text += "\npush down on steelpad";
                     Vector3 direction = Vector3.down;
-                    if (multiplier > 0 && transform.position.y - hit.point.y > maxPushHeight + 0.1f) {
-                        var vel = GetComponent<Rigidbody>().velocity;
-                        GetComponent<Rigidbody>().velocity = new Vector3(vel.x, 0, vel.z);
-                        direction.y = -9.8f / multiplier / force;
+                    if (!interactable.ignoreVertLimit) {
+                        if (multiplier > 0 && transform.position.y - hit.point.y > maxPushHeight + 0.1f) {
+                            var vel = GetComponent<Rigidbody>().velocity;
+                            GetComponent<Rigidbody>().velocity = new Vector3(vel.x, 0, vel.z);
+                            direction.y = -9.8f / multiplier / force;
+                        }
                     }
-                    GetComponent<Rigidbody>().AddForce(-1 * direction * force * multiplier);
-                    rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 
+                   
+                    GetComponent<Rigidbody>().AddForce(-1 * direction * force * multiplier * interactable.multiplier);
+                    rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier, Time.deltaTime); 
                     return;
                 }
             }
             if (multiplier == -1 && Vector3.Angle(rayInteractor.transform.position - hit.point, Vector3.up) < pushDownAngle && hit.rigidbody.mass < threshold) {
                 // Timer.text += "\npull up on iron cube";
                 Vector3 direction = Vector3.up;
-                hit.rigidbody.AddForce(-1 * direction * force * multiplier);
-                rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 
+                hit.rigidbody.AddForce(-1 * direction * force * multiplier * interactable.multiplier);
+                rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier, Time.deltaTime); 
                 return;
             }
             if (hit.rigidbody.mass > threshold) {
@@ -148,14 +152,16 @@ public class Player : MonoBehaviour {
                 direction.Normalize();
                 //Caps horizontal velocity of cubes
                 float horizontalVelocity = new Vector2(hit.rigidbody.velocity.x, hit.rigidbody.velocity.z).magnitude;
-                if (horizontalVelocity >= maxHorizontalVelocity / hit.rigidbody.mass) {
-                    direction.x = 0;
-                    direction.z = 0;
+                if (!interactable.ignoreHorzLimit) {
+                    if (horizontalVelocity >= maxHorizontalVelocity / hit.rigidbody.mass) {
+                        direction.x = 0;
+                        direction.z = 0;
+                    }
                 }
                 // Timer.text += "\n force = " + direction * force * multiplier;
                 hit.rigidbody.AddForce(direction * force * multiplier);
             }
-            rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier * interactable.multiplier, Time.deltaTime); 
+            rayInteractor.gameObject.GetComponent<ActionBasedController>().SendHapticImpulse(multiplier, Time.deltaTime); 
         }
     }
 

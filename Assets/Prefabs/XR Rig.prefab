@@ -969,6 +969,7 @@ MonoBehaviour:
   leftForceReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   rightForceReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   restartReference: {fileID: 4904781175629293858, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  noWin: 0
 --- !u!114 &3283715913857554803
 MonoBehaviour:
   m_ObjectHideFlags: 0
